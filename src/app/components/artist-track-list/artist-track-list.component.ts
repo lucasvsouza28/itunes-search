@@ -17,7 +17,7 @@ export class ArtistTrackListComponent implements OnInit {
 
   ngOnInit() {
     this.route.parent.params
-      .subscribe(p => this.searchService.getArtistTracks(+p['id']).then(d=> this.tracks = d.slice(1)));
+      .subscribe(p => this.searchService.getArtistTracks(+p['id'])
+      .then(d=> this.tracks = d.slice(1)));
   }
-
 }

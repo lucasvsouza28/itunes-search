@@ -7,7 +7,7 @@ import { HttpModule, JsonpModule, Jsonp } from '@angular/http';
 import { AppRoutingModule } from 'app/app-routing.module';
 
 import { AppComponent } from './app.component';
-import { SearchService } from './services';
+import { SearchService, AlwaysAuthGuard } from './services';
 import { HomeComponent
          , SearchComponent
          , ArtistComponent
@@ -33,7 +33,7 @@ import { HomeComponent
     JsonpModule,
     AppRoutingModule
   ],
-  providers: [SearchService],
+  providers: [SearchService, AlwaysAuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

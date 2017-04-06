@@ -6,6 +6,8 @@ import { Observable } from "rxjs/Observable";
 import { Searchitem } from "app/models";
 import { SearchService } from "app/services";
 
+import 'rxjs/add/operator/do';
+
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -35,11 +37,17 @@ export class SearchComponent implements OnInit {
       .distinctUntilChanged()
       .do(() => this.loading = true)
       .switchMap(term => this.searchService.search(term))
-      .subscribe(p => {this.results = p; this.loading = false;})
+      .subscribe(p => { this.results = p; this.loading = false; })
   }
 
   doSearch(term: string) {
     this.loading = true;
-    this.searchService.search(term).subscribe(d => {this.results = d;this.loading = false;});
+    this.searchService
+      .search(term)
+      .subscribe(
+        d => this.results = d
+        , error => console.log(error)
+        , ()=> this.loading = false
+      );
   }
 }

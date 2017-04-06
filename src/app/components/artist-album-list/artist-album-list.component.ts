@@ -11,14 +11,11 @@ export class ArtistAlbumListComponent implements OnInit {
   albums: any[];
 
   constructor(private route: ActivatedRoute
-              , private searchService: SearchService) {
-    
-  }
+              , private searchService: SearchService) {}
 
   ngOnInit() {
     this.route.parent.params
       .subscribe(p => this.searchService.getArtistAlbums(+p['id']).then(d=> {
-        console.log(d);
         this.albums = d.slice(1);
       }));
   }

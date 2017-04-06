@@ -1,3 +1,6 @@
+<div class="text-center" *ngIf="!tracks">
+	<span class="lead">Loading...</span>
+</div>
 <ul class="list-group">
 	<li class="list-group-item"
 	    *ngFor="let track of tracks">
