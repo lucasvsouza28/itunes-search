@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, JsonpModule, Jsonp } from '@angular/http';
 import { Searchitem } from '../models/searchitem';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/toPromise';
 import { Observable } from 'rxjs';
 
 @Injectable()
@@ -45,4 +46,28 @@ export class SearchService {
         .map(item => { return new Searchitem(item.trackName, item.artistName, item.trackViewUrl, item.artworkUrl30, item.artistId); });
     });
   };
+
+  getArtist(id: number): Promise<any> {
+    const url = `https://itunes.apple.com/lookup?id=${id}&callback=JSONP_CALLBACK`;
+    return this.jsonp.request(url)
+      .toPromise()
+      .then(data => data.json().results[0])
+      .catch(msg => msg.error || msg);
+  };
+
+  getArtistTracks(id: number): Promise<any[]> {
+    const url = `https://itunes.apple.com/lookup?id=${id}&entity=song&callback=JSONP_CALLBACK`;
+    return this.jsonp.request(url)
+      .toPromise()
+      .then(data => data.json().results as any[])
+      .catch(msg => msg.error || msg);
+  }
+
+  getArtistAlbums(id: number): Promise<any[]> {
+    const url = `https://itunes.apple.com/lookup?id=${id}&entity=album&callback=JSONP_CALLBACK`;
+    return this.jsonp.request(url)
+      .toPromise()
+      .then(data => data.json().results as any[])
+      .catch(msg => msg.error || msg);
+  }
 }
