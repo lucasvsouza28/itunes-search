@@ -47,7 +47,11 @@ export class SearchComponent implements OnInit {
       .subscribe(
         d => this.results = d
         , error => console.log(error)
-        , ()=> this.loading = false
+        , () => this.loading = false
       );
-  }
+  };
+
+  canDeactivate(): boolean {
+    return this.results != null && this.results.length > 0;
+  };
 }

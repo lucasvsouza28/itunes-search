@@ -70,4 +70,12 @@ export class SearchService {
       .then(data => data.json().results as any[])
       .catch(msg => msg.error || msg);
   }
+
+  getArtistVideos(id: number): Promise<any[]> {
+    const url = `https://itunes.apple.com/lookup?id=${id}&entity=musicVideo&callback=JSONP_CALLBACK`;
+    return this.jsonp.request(url)
+      .toPromise()
+      .then(data => data.json().results as any[])
+      .catch(msg => msg.error || msg);
+  };
 }

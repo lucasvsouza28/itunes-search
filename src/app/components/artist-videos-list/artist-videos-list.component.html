@@ -1,0 +1,12 @@
+<div class="text-center" *ngIf="!videos">
+	<span class="lead">Loading...</span>
+</div>
+<ul class="list-group">
+	<li class="list-group-item"
+	    *ngFor="let video of videos">
+		<img src="{{video.artworkUrl100}}">
+		<a target="_blank"
+		   href="{{video.trackViewUrl}}">{{ video.trackName }}
+		</a>
+	</li>
+</ul>
