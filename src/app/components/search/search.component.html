@@ -1,0 +1,16 @@
+<form class="form-inline">
+  <div class="form-group" style="width: 100%;">
+    <input type="search" class="form-control col-md-12" placeholder="Enter the search" [formControl]="searchField" />
+  </div>  
+</form>
+
+<div class="text-center">
+  <p class="lead" *ngIf="loading">Loading...</p>
+</div>
+
+<ul class="list-group">
+  <li class="list-group-item" *ngFor="let t of results">
+    <img src="{{ t.thumbnail }}" alt="">
+    <a targer="_blank" [routerLink]="['/artist', t.artistId]">{{ t.name }}</a>    
+  </li>
+</ul>
